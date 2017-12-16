@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="skeleton.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="player-container">
+    <video class="video-player" autoplay>
+        <source src="big_buck_bunny.mp4" type="video/mp4">
+    </video>
+
+    <div class="media-controls container">
+        <div class="buffer row">
+            <div class="twelve columns"><input class="slider" type="range" min="0" max="1" step="0.001" value="0"></div>
+        </div>
+        <div class="buttons row">
+            <div class="play three columns"><img src="play.png"></div>
+            <div class="mute three columns"><img src="mute.png"></div>
+            <div class="six columns"><input class="volume" type="range" min="0" max="1" step="0.01" value="1"></div>
+
+        </div>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
