@@ -6,7 +6,8 @@
 
 .video-player{
     width: 100%;
-    height: 100%;
+    height: 90%;
+    background-color: #222222;
 
 }
 
@@ -21,7 +22,13 @@ img{
 }
 
 .buttons{
-    width: 100%;
+    margin: 0 auto;
+
+}
+
+
+.play, .mute, .volumeSlider{
+    text-align: center;
 }
 
 .slider{
@@ -29,8 +36,15 @@ img{
     height: 30px;
     border-radius: 10px;
     margin: 20px 0;
+    border: 1px solid gray;
+    background-color: #222222;
 }
 
-.slider input{
+
+.cursor{
+    width: 30px;
     height: 30px;
+    border-radius: 10px;
+    background-color: #D1D1D1;
+    transition: margin-left .1s linear;
 }

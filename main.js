@@ -3,6 +3,7 @@ const play = document.querySelector('.play');
 const mute = document.querySelector('.mute');
 const volume = document.querySelector('.volume');
 const slider = document.querySelector('.slider');
+const cursor = document.querySelector('.cursor');
 
 
 function isPlaying(){
@@ -22,7 +23,6 @@ function toggleMute(){
 
 
 function setVolume(value) {
-    console.log(value);
     player.volume = Math.max(Math.min(value, 1), 0);
 }
 
@@ -38,10 +38,24 @@ document.body.onkeyup = function(e){
 mute.addEventListener('click', toggleMute);
 volume.addEventListener('change', (ev) => setVolume(ev.target.value));
 
-slider.addEventListener('change', function (ev) {
-    player.currentTime = ev.target.value * player.duration;
+slider.addEventListener('click', function (ev) {
+    const coeff = (ev.clientX - slider.getBoundingClientRect().x) / slider.getBoundingClientRect().width;
+    player.currentTime = coeff * player.duration;
 });
 
 setInterval(function () {
-  slider.value = player.currentTime / player.duration;
-}, 1000);
+
+    // Update timer track slider
+    const trackWidth = slider.getBoundingClientRect().width - cursor.getBoundingClientRect().width;
+    const coeff = player.currentTime / player.duration;
+    cursor.style.marginLeft = (coeff * trackWidth) + 'px';
+
+    // Check if video ended
+    if(player.currentTime === player.duration){
+        player.pause();
+        player.currentTime = 0;
+        play.innerHTML = '<img src="play.png">';
+    }
+}, 100);
+
+
