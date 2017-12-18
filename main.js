@@ -9,10 +9,10 @@ const cursor = document.querySelector('.cursor');
 function isPlaying(){
     if (player.paused){
         player.play();
-        play.innerHTML = '<img src="pause.png">';
+        play.innerHTML = '<img src="img/pause.png">';
     }else {
         player.pause();
-        play.innerHTML = '<img src="play.png">';
+        play.innerHTML = '<img src="img/play.png">';
 
     }
 }
@@ -54,7 +54,7 @@ setInterval(function () {
     if(player.currentTime === player.duration){
         player.pause();
         player.currentTime = 0;
-        play.innerHTML = '<img src="play.png">';
+        play.innerHTML = '<img src="img/play.png">';
     }
 }, 100);
 
