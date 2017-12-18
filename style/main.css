@@ -1,50 +1,208 @@
-
-.player-container{
-    width: 100%;
-    height: 800px;
+html {
+  font-size: 62.5%;
+  /* base de 10 */
 }
 
-.video-player{
-    width: 100%;
-    height: 90%;
-    background-color: #222222;
-
+body {
+  background: #212121;
+  width: 80%;
 }
 
-
-.media-controls{
-   width: 100%;
+a {
+  display: block;
+  cursor: pointer;
 }
 
-img{
-    width: 50px;
-
+.overlay {
+  display: block;
+  width: 300px;
+  height: 300px;
+  background-color: grey;
+  color: white;
 }
 
-.buttons{
-    margin: 0 auto;
-
+.player-container {
+  width: 100%;
+  height: 800px;
 }
 
-
-.play, .mute, .volumeSlider{
-    text-align: center;
+.video-player {
+  width: 100%;
+  height: 90%;
+  background-color: #222222;
 }
 
-.slider{
-    width: 100%;
-    height: 30px;
-    border-radius: 10px;
-    margin: 20px 0;
-    border: 1px solid gray;
-    background-color: #222222;
+.media-controls {
+  width: 100%;
 }
 
+img {
+  width: 50px;
+}
 
-.cursor{
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
-    background-color: #D1D1D1;
-    transition: margin-left .1s linear;
+.buttons {
+  margin: 0 auto;
+}
+
+.play, .mute, .volumeSlider {
+  text-align: center;
+}
+
+.slider {
+  width: 100%;
+  height: 30px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 1px solid gray;
+  background-color: #222222;
+}
+
+.cursor {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #D1D1D1;
+  transition: margin-left .1s linear;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.logo {
+  background: grey;
+}
+
+.search {
+  margin-right: 5rem;
+  width: 30%;
+}
+
+.searchInput {
+  width: 100%;
+}
+
+.sideMenu {
+  height: 100vh;
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20%;
+  background: #111111;
+  color: #f2f2f2;
+}
+
+.menuTitle {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.menuList {
+  margin-top: 5rem;
+}
+
+.menuListItems {
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-family: 'gotham' sans-serif;
+}
+
+.menuListItems li {
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+}
+
+.recent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4rem;
+  margin: 0 4rem;
+  margin-top: 5rem;
+}
+
+.film {
+  height: 230px;
+  width: 100%;
+  background: grey;
+}
+
+.genre {
+  margin-top: 5rem;
+}
+
+.genreTitle {
+  color: #f2f2f2;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.genreList {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-top: 5rem;
+}
+
+.tags {
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+.tags li {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid #f2f2f2;
+  border-radius: 25px;
+}
+
+.action {
+  grid-column: 6;
+  grid-row: 1;
+  margin-bottom: 5rem;
+}
+
+.animation {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.comedy {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.horror {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.thriller {
+  grid-column: 5;
+  grid-row: 2;
+}
+
+.videoContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 4rem;
+  margin: 0 4rem;
+  margin-top: 5rem;
+}
+
+.videoGrid {
+  height: 400px;
+  width: 100%;
+  background-color: grey;
+  color: white;
+}
+
+.hoverVideoContainer {
+  display: none;
+}
+
+.videoGrid:hover>.hoverVideoContainer {
+  display: block;
 }
