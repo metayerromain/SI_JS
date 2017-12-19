@@ -14,9 +14,15 @@ var dataMovies = data.films;
 
 //création du contenu des hover
 for (var i = 0; i < dataMovies.length; i++) {
+
   var videoGrid = document.createElement("div");
   videoGrid.classList.add("videoGrid");
   moviesContainer.appendChild(videoGrid);
+
+  var imgMovie = document.createElement("img");
+  imgMovie.classList.add("imgMovieMini");
+  imgMovie.setAttribute("src", "img/miniatures/" + dataMovies[i].img);
+  videoGrid.appendChild(imgMovie);
 
   var hoverVideoContainer = document.createElement("div");
   hoverVideoContainer.classList.add("hoverVideoContainer");
@@ -48,11 +54,25 @@ for (var i = 0; i < dataMovies.length; i++) {
 }
 
 var allMoviesPlayButton = document.querySelectorAll(".playButtonContainer");
+var overlayVideo = document.querySelector(".overlayVideo");
 
 //clic sur le bouton plus du hover
 for (let a = 0; a < allMoviesPlayButton.length; a++) {
   allMoviesPlayButton[a].addEventListener("click", function() {
     console.log(dataMovies[a]);
+
+    var titleMovieOverlay = document.createElement("div");
+    titleMovieOverlay.classList.add("titleMovieOverlay");
+    titleMovieOverlay.innerHTML = dataMovies[a].title;
+    overlayVideo.appendChild(titleMovieOverlay);
+
+    var tagMovieOverlay = document.createElement("div");
+    titleMovieOverlay.classList.add("titleMovieOverlay");
+    titleMovieOverlay.innerHTML = dataMovies[a].title;
+    overlayVideo.appendChild(titleMovieOverlay);
+
+
+    overlayVideo.style.display = "block";
 
     // player.setAttribute("src", "videos/" + dataMovies[a].src);
     // isPlaying();
