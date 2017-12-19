@@ -39,7 +39,7 @@ for (var i = 0; i < dataMovies.length; i++) {
 
   var playButtonContainer = document.createElement("div");
   playButtonContainer.classList.add("playButtonContainer");
-  hoverVideoContainer.appendChild(playButtonContainer);
+  videoGrid.appendChild(playButtonContainer);
 
   var playButtonImg = document.createElement("img");
   playButtonImg.classList.add("playButtonImg");
@@ -49,11 +49,13 @@ for (var i = 0; i < dataMovies.length; i++) {
 
 var allMoviesPlayButton = document.querySelectorAll(".playButtonContainer");
 
+//clic sur le bouton plus du hover
 for (let a = 0; a < allMoviesPlayButton.length; a++) {
   allMoviesPlayButton[a].addEventListener("click", function() {
     console.log(dataMovies[a]);
-    player.setAttribute("src", "videos/" + dataMovies[a].src);
-    isPlaying();
+
+    // player.setAttribute("src", "videos/" + dataMovies[a].src);
+    // isPlaying();
   })
 }
 
