@@ -12,6 +12,7 @@ const slider = document.querySelector('.slider');
 const cursor = document.querySelector('.cursor');
 const controls = document.querySelector('.media-controls');
 const timeLeft = document.querySelector('.duration');
+const tags = document.querySelectorAll('.tags');
 let controlsCanHide = true;
 let hideControlsTimeout = null;
 const volumeOverlay = document.querySelector('.volumeOverlay');
@@ -20,16 +21,68 @@ var moviesContainer = document.querySelector(".allMovies");
 var titleMovie = document.querySelector(".titleMovie");
 var author = document.querySelector(".author");
 var description = document.querySelector(".description");
+var recentMovieContainer = document.querySelector(".recent");
 var dataMovies = data.films;
 
 var currenta;
 
-//création du contenu des hover
+//création des cases des films récents et du contenu des hover
+for (var y = 0; y < dataMovies.length; y++) {
+  if (dataMovies[y].year == 2017 || dataMovies[y].year == 2016) {
+
+    var recentMovie = document.createElement("div");
+    recentMovie.classList.add("film");
+    recentMovieContainer.appendChild(recentMovie);
+
+    recentMovie.setAttribute("name", y);
+
+    var imgMovie = document.createElement("img");
+    imgMovie.classList.add("imgMovieMini");
+    imgMovie.setAttribute("src", "img/miniatures/" + dataMovies[y].img);
+    recentMovie.appendChild(imgMovie);
+
+    var hoverVideoContainer = document.createElement("div");
+    hoverVideoContainer.classList.add("hoverVideoContainer");
+    recentMovie.appendChild(hoverVideoContainer);
+
+    var titleMovie = document.createElement("div");
+    titleMovie.classList.add("titleMovie");
+    titleMovie.textContent = dataMovies[y].title;
+    recentMovie.appendChild(titleMovie);
+
+    var authorMovie = document.createElement("div");
+    authorMovie.classList.add("authorMovie");
+    authorMovie.textContent = dataMovies[y].author;
+    hoverVideoContainer.appendChild(authorMovie);
+
+    var descriptionMovie = document.createElement("div");
+    descriptionMovie.classList.add("descriptionMovie");
+    descriptionMovie.innerHTML = dataMovies[y].description;
+    hoverVideoContainer.appendChild(descriptionMovie);
+
+    var playButtonContainer = document.createElement("div");
+    playButtonContainer.classList.add("playButtonContainerRecent");
+    recentMovie.appendChild(playButtonContainer);
+
+    var playButtonImg = document.createElement("img");
+    playButtonImg.classList.add("playButtonImg");
+    playButtonImg.setAttribute('src', 'img/logo_plus.png');
+    playButtonContainer.appendChild(playButtonImg);
+  }
+  if (recentMovieContainer.children.length >= 3) {
+    y = 999;
+  }
+}
+
+//création des cases de tous les films et du contenu des hover
 for (var i = 0; i < dataMovies.length; i++) {
 
   var videoGrid = document.createElement("div");
   videoGrid.classList.add("videoGrid");
+  videoGrid.dataset.category = dataMovies[i].category;
   moviesContainer.appendChild(videoGrid);
+
+  videoGrid.setAttribute("name", i);
 
   var imgMovie = document.createElement("img");
   imgMovie.classList.add("imgMovieMini");
@@ -61,12 +114,14 @@ for (var i = 0; i < dataMovies.length; i++) {
 
   var playButtonImg = document.createElement("img");
   playButtonImg.classList.add("playButtonImg");
-  playButtonImg.setAttribute('src', 'img/play-button.png');
+  playButtonImg.setAttribute('src', 'img/logo_plus.png');
   playButtonContainer.appendChild(playButtonImg);
 }
 
+//Séléction des élèments du DOM générés dans l'overlay
 var body = document.querySelector("body");
 var allMoviesPlayButton = document.querySelectorAll(".playButtonContainer");
+var playButtonContainerRecent = document.querySelectorAll(".playButtonContainerRecent");
 var overlayVideo = document.querySelector(".overlayContainer");
 var retourTitle = document.querySelector(".retourTitle");
 var imgContainer = document.querySelector(".imgContainer");
@@ -83,10 +138,9 @@ var star2 = document.querySelector(".star2");
 var star3 = document.querySelector(".star3");
 var star4 = document.querySelector(".star4");
 var star5 = document.querySelector(".star5");
-
 var imgOverlay = document.createElement("img");
 
-//clic sur le bouton retour
+//évènement clic sur le bouton retour
 retourTitle.addEventListener("click", function() {
   overlayVideo.style.display = "none";
   imgOverlay.classList.remove("imgOverlay");
@@ -97,65 +151,79 @@ retourTitle.addEventListener("click", function() {
   star4.style.display = 'none';
   star5.style.display = 'none';
   body.style.overflow = "visible";
-
 });
 
-//clic sur le bouton plus du hover
-for (let a = 0; a < allMoviesPlayButton.length; a++) {
-  allMoviesPlayButton[a].addEventListener("click", function() {
-    currenta = a;
-    body.style.overflow = "hidden";
+//fonction qui fait pop l'overlay avec les infos nécéssaires
+function overlayPop(currenta) {
+  body.style.overflow = "hidden";
 
-    imgOverlay.classList.add("imgOverlay");
-    imgOverlay.setAttribute('src', 'img/miniatures/' + dataMovies[a].img);
-    imgContainer.appendChild(imgOverlay);
+  imgOverlay.classList.add("imgOverlay");
+  imgOverlay.setAttribute('src', 'img/miniatures/' + dataMovies[currenta].img);
+  imgContainer.appendChild(imgOverlay);
 
-    overlayMovieTitle.innerHTML = dataMovies[a].title;
-    overlayRating.innerHTML = dataMovies[a].rating + "/5";
-    overlayDuration.innerHTML = dataMovies[a].duration + " min";
-    overlayDate.innerHTML = dataMovies[a].year;
-    overlayDescription2.innerHTML = dataMovies[a].description;
-    overlayGenre.innerHTML = dataMovies[a].category;
+  overlayMovieTitle.innerHTML = dataMovies[currenta].title;
+  overlayRating.innerHTML = dataMovies[currenta].rating + "/5";
+  overlayDuration.innerHTML = dataMovies[currenta].duration + " min";
+  overlayDate.innerHTML = dataMovies[currenta].year;
+  overlayDescription2.innerHTML = dataMovies[currenta].description;
+  overlayGenre.innerHTML = dataMovies[currenta].category;
 
-    if (Math.floor(dataMovies[a].rating) === 0) {
-      star0.style.display = 'inline';
-    }
-    if (Math.floor(dataMovies[a].rating) === 1) {
-      star1.style.display = 'inline';
-    }
-    if (Math.floor(dataMovies[a].rating) === 2) {
-      star2.style.display = 'inline';
-    }
-    if (Math.floor(dataMovies[a].rating) === 3) {
-      star3.style.display = 'inline';
-    }
-    if (Math.floor(dataMovies[a].rating) === 4) {
-      star4.style.display = 'inline';
-    }
-    if (Math.floor(dataMovies[a].rating) === 5) {
-      star5.style.display = 'inline';
-    }
+  if (Math.floor(dataMovies[currenta].rating) === 0) {
+    star0.style.display = 'inline';
+  }
+  if (Math.floor(dataMovies[currenta].rating) === 1) {
+    star1.style.display = 'inline';
+  }
+  if (Math.floor(dataMovies[currenta].rating) === 2) {
+    star2.style.display = 'inline';
+  }
+  if (Math.floor(dataMovies[currenta].rating) === 3) {
+    star3.style.display = 'inline';
+  }
+  if (Math.floor(dataMovies[currenta].rating) === 4) {
+    star4.style.display = 'inline';
+  }
+  if (Math.floor(dataMovies[currenta].rating) === 5) {
+    star5.style.display = 'inline';
+  }
 
-    overlayVideo.style.display = "block";
+  overlayVideo.style.display = "block";
+}
 
+//évènement clic sur le bouton "plus" des FILMS RECENTS du hover pour apparition de l'Overlay
+for (let b = 0; b < playButtonContainerRecent.length; b++) {
+  playButtonContainerRecent[b].addEventListener("click", function() {
+    currenta = parseInt(playButtonContainerRecent[b].parentElement.getAttribute("name"));
 
+    overlayPop(currenta);
   })
 }
+
+//évènement clic sur le bouton "plus" du hover pour apparition de l'Overlay
+for (let a = 0; a < allMoviesPlayButton.length; a++) {
+  allMoviesPlayButton[a].addEventListener("click", function() {
+    currenta = parseInt(allMoviesPlayButton[a].parentElement.getAttribute("name"));
+
+    overlayPop(currenta);
+  })
+}
+
 var lowOpacity = document.querySelector(".lowOpacity");
 var imgStartPlayer = document.querySelector(".imgContainer");
 
+//apparition du player video pour
 imgStartPlayer.addEventListener("click", function() {
   playerContainer.style.display = "block";
   lowOpacity.style.display = "block";
-
   player.setAttribute("src", "videos/" + dataMovies[currenta].src);
   togglePlaying();
 });
 
+//clic sur l'opacité pour quitter la vidéo
 lowOpacity.addEventListener("click", function() {
   playerContainer.style.display = "none";
   lowOpacity.style.display = "none";
-  togglePlaying();
+  player.setAttribute("src", "");
 });
 
 //PLAYER VIDEO
@@ -344,3 +412,39 @@ controls.addEventListener('mouseleave', function() {
 
 // INIT
 player.volume = volume.value;
+
+//tags
+
+const pickedTags = [];
+
+function updateFilter() {
+  console.log(pickedTags);
+  if (pickedTags.length === 0) {
+    for (let i = 0; i < moviesContainer.children.length; i++) {
+      moviesContainer.children[i].style.display = '';
+    }
+    return;
+  }
+
+  for (let movieIndex = 0; movieIndex < moviesContainer.children.length; movieIndex++) {
+    const movieElement = moviesContainer.children[movieIndex];
+    let isVisible = pickedTags.indexOf(movieElement.dataset.category) !== -1;
+
+    movieElement.style.display = isVisible ? '' : 'none';
+  }
+}
+
+for (let i = 0; i < tags.length; i++) {
+  tags[i].addEventListener('click', function() {
+    if (this.classList.contains('tag-highlight')) {
+      this.classList.remove('tag-highlight');
+      pickedTags.splice(pickedTags.indexOf(this.dataset.category), 1);
+    } else {
+      this.classList.add('tag-highlight');
+      pickedTags.push(this.dataset.category);
+    }
+    updateFilter();
+  });
+}
+
+//tags
