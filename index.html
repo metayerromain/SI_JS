@@ -104,9 +104,12 @@
 
 
   <section class="sideMenuDisplay">
-    <h2 class="menuTitle">Menu</h2>
+    <div class="seConnecterPosition">
+      <a class="seConnecter" href="#">Se Connecter</a>
+    </div>
+    <h2 class="menuTitle">À l'affiche</h2>
     <h2 class="menuGenre">Genre</h2>
-    <ul>
+    <ul class="menuList">
       <li class="menuListItems">#horror</li>
       <li class="menuListItems">#comédie</li>
       <li class="menuListItems">#thriller</li>
@@ -128,19 +131,24 @@
       <div class="search">
         <input type="search" placeholder="Search" class="searchInput">
       </div>
-      <a class="burger burgerPosition" href="#">
-        <span class="burger-menu"></span>
-      </a>
     </div>
+    <a class="burger burgerPosition" href="#">
+    <span class="burger-menu burgerMenuBefore"></span>
+    <span class="burger-menu burgerMid"></span>
+    <span class="burger-menu burgerMenuAfter"></span>
+  </a>
+
   </header>
 
   <div class="bodyWidth">
 
     <hr>
 
-    <section class="recentContainer">
-      <h2 class="recentTitle">À l'affiche</h2>
-      <div class="recent">
+
+    <section class="notreSelectionContainer">
+      <h2 class="recentTitle">Notre Séléction</h2>
+      <div class="notreSelection">
+
       </div>
     </section>
 
@@ -149,7 +157,6 @@
     <section class="genreContainer">
       <h2 class="genreTitle2">Genre</h2>
       <div class="genre">
-
         <input type="checkbox" id="checkboxHorror checkboxDisplay">
         <label class="tags horror genreTitle" for="checkboxHorror" data-category="Horror / Thriller"> #horror </label>
         <input type="checkbox" id="checkboxComédie checkboxDisplay">
@@ -176,45 +183,14 @@
     <section class="containerVideo">
       <h2 class="videoTitle2">Recent</h2>
       <div class="videoContainer allMovies">
-
       </div>
     </section>
 
-
-    <!-- PLAYER -->
-
-    <div class="lowOpacity">
-    </div>
-    <div class="player-container">
-      <video class="video-player">
-      </video>
-
-      <div class="media-controls">
-        <div class="buffer">
-          <div class=" slider">
-            <div class="cursor"></div>
-          </div>
-        </div>
-
-        <div class="buttons">
-          <div class="buttonsLeft">
-            <div class="play"><img src="img/play.png" alt="play"></div>
-            <div class="stop"><img src="img/stop.png" alt="stop"></div>
-            <div class="volumeSlider">
-              <img class="volume-img" src="img/volume.png" alt="volume">
-              <input class="volume" type="range" min="0" max="1" step="0.01" value="0.5">
-            </div>
-            <div class=" duration">00:00 / 00:00</div>
-          </div>
-
-          <div class="buttonsRight">
-            <div class="fullScreen-button"><img src="img/full_screen.png" alt="Full Screen"></div>
-          </div>
-        </div>
+    <section class="recentContainer">
+      <h2 class="recentTitle">À l'affiche</h2>
+      <div class="recent">
       </div>
-    </div>
-
-    <!-- PLAYER -->
+    </section>
 
     <footer class="footer">
       <div class="footerGrid">
@@ -271,6 +247,40 @@
       <p class="copyright">Groupe 23 <br> CopyRight 2017</p>
     </footer>
 
+    <!-- PLAYER -->
+
+    <div class="lowOpacity">
+    </div>
+    <div class="player-container">
+      <video class="video-player">
+  </video>
+
+      <div class="media-controls">
+        <div class="buffer">
+          <div class=" slider">
+            <div class="cursor"></div>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <div class="buttonsLeft">
+            <div class="play"><img src="img/play.png" alt="play"></div>
+            <div class="stop"><img src="img/stop.png" alt="stop"></div>
+            <div class="volumeSlider">
+              <img class="volume-img" src="img/volume.png" alt="volume">
+              <input class="volume" type="range" min="0" max="1" step="0.01" value="0.5">
+            </div>
+            <div class=" duration">00:00 / 00:00</div>
+          </div>
+
+          <div class="buttonsRight">
+            <div class="fullScreen-button"><img src="img/full_screen.png" alt="Full Screen"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAYER -->
 
 
 
@@ -282,10 +292,23 @@
     var nav = document.querySelector('.sideMenuDisplay');
     var changeSize = document.querySelector('.changeSize');
     var body = document.querySelector('.bodyWidth');
+    var burgerTop = document.querySelector('.burgerMenuBefore');
+    var burgerRotateTop = document.querySelector('.burgerRotateTop');
+    var burgerMid = document.querySelector('.burgerMid');
+    var burgerMidDisplay = document.querySelector('.burgerMidDisplay');
+    var burgerBot = document.querySelector('.burgerMenuAfter');
+    var burgerRotateBot = document.querySelector('.burgerRotateBot');
+    var burgerPosition = document.querySelector('.burgerPosition');
+
+
+
 
     burger.addEventListener('click', function() {
       nav.classList.toggle('closeBurger');
-      body.classList.toggle('changeSize')
+      body.classList.toggle('changeSize');
+      burgerTop.classList.toggle('burgerRotateTop');
+      burgerMid.classList.toggle('burgerMidDisplay');
+      burgerBot.classList.toggle('burgerRotateBot');
     });
   </script>
 

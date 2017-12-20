@@ -22,52 +22,48 @@ var titleMovie = document.querySelector(".titleMovie");
 var author = document.querySelector(".author");
 var description = document.querySelector(".description");
 var recentMovieContainer = document.querySelector(".recent");
+var notreSelectionContainer = document.querySelector(".notreSelection");
 var dataMovies = data.films;
 
 var currenta;
 
-//création des cases des films récents et du contenu des hover
-for (var y = 0; y < dataMovies.length; y++) {
-  if (dataMovies[y].year == 2017 || dataMovies[y].year == 2016) {
+//création des cases des films Notre Selection et du contenu des hover
+for (var z = 0; z < dataMovies.length; z++) {
+  if (dataMovies[z].rating == 5) {
 
-    var recentMovie = document.createElement("div");
-    recentMovie.classList.add("film");
-    recentMovieContainer.appendChild(recentMovie);
+    var notreSelection = document.createElement("div");
+    notreSelection.classList.add("film");
+    notreSelectionContainer.appendChild(notreSelection);
 
-    recentMovie.setAttribute("name", y);
+    notreSelection.setAttribute("name", z);
 
     var imgMovie = document.createElement("img");
     imgMovie.classList.add("imgMovieMini");
-    imgMovie.setAttribute("src", "img/miniatures/" + dataMovies[y].img);
-    recentMovie.appendChild(imgMovie);
+    imgMovie.setAttribute("src", "img/miniatures/" + dataMovies[z].img);
+    notreSelection.appendChild(imgMovie);
 
     var hoverVideoContainer = document.createElement("div");
     hoverVideoContainer.classList.add("hoverVideoContainer");
-    recentMovie.appendChild(hoverVideoContainer);
+    notreSelection.appendChild(hoverVideoContainer);
 
     var titleMovie = document.createElement("div");
     titleMovie.classList.add("titleMovie");
-    titleMovie.textContent = dataMovies[y].title;
-    recentMovie.appendChild(titleMovie);
+    titleMovie.textContent = dataMovies[z].title;
+    notreSelection.appendChild(titleMovie);
 
     var authorMovie = document.createElement("div");
     authorMovie.classList.add("authorMovie");
-    authorMovie.textContent = dataMovies[y].author;
+    authorMovie.textContent = dataMovies[z].author;
     hoverVideoContainer.appendChild(authorMovie);
 
-    var descriptionMovie = document.createElement("div");
-    descriptionMovie.classList.add("descriptionMovie");
-    descriptionMovie.innerHTML = dataMovies[y].description;
-    hoverVideoContainer.appendChild(descriptionMovie);
-
-    var playButtonContainer = document.createElement("div");
-    playButtonContainer.classList.add("playButtonContainerRecent");
-    recentMovie.appendChild(playButtonContainer);
+    var plusButtonContainerSelection = document.createElement("div");
+    plusButtonContainerSelection.classList.add("plusButtonContainerSelection");
+    notreSelection.appendChild(plusButtonContainerSelection);
 
     var playButtonImg = document.createElement("img");
     playButtonImg.classList.add("playButtonImg");
     playButtonImg.setAttribute('src', 'img/logo_plus.png');
-    playButtonContainer.appendChild(playButtonImg);
+    plusButtonContainerSelection.appendChild(playButtonImg);
   }
   if (recentMovieContainer.children.length >= 3) {
     y = 999;
@@ -103,11 +99,6 @@ for (var i = 0; i < dataMovies.length; i++) {
   authorMovie.textContent = dataMovies[i].author;
   hoverVideoContainer.appendChild(authorMovie);
 
-  var descriptionMovie = document.createElement("div");
-  descriptionMovie.classList.add("descriptionMovie");
-  descriptionMovie.innerHTML = dataMovies[i].description;
-  hoverVideoContainer.appendChild(descriptionMovie);
-
   var playButtonContainer = document.createElement("div");
   playButtonContainer.classList.add("playButtonContainer");
   videoGrid.appendChild(playButtonContainer);
@@ -116,6 +107,49 @@ for (var i = 0; i < dataMovies.length; i++) {
   playButtonImg.classList.add("playButtonImg");
   playButtonImg.setAttribute('src', 'img/logo_plus.png');
   playButtonContainer.appendChild(playButtonImg);
+}
+
+//création des cases des films récents et du contenu des hover
+for (var y = 0; y < dataMovies.length; y++) {
+  if (dataMovies[y].year == 2017 || dataMovies[y].year == 2016) {
+
+    var recentMovie = document.createElement("div");
+    recentMovie.classList.add("film");
+    recentMovieContainer.appendChild(recentMovie);
+
+    recentMovie.setAttribute("name", y);
+
+    var imgMovie = document.createElement("img");
+    imgMovie.classList.add("imgMovieMini");
+    imgMovie.setAttribute("src", "img/miniatures/" + dataMovies[y].img);
+    recentMovie.appendChild(imgMovie);
+
+    var hoverVideoContainer = document.createElement("div");
+    hoverVideoContainer.classList.add("hoverVideoContainer");
+    recentMovie.appendChild(hoverVideoContainer);
+
+    var titleMovie = document.createElement("div");
+    titleMovie.classList.add("titleMovie");
+    titleMovie.textContent = dataMovies[y].title;
+    recentMovie.appendChild(titleMovie);
+
+    var authorMovie = document.createElement("div");
+    authorMovie.classList.add("authorMovie");
+    authorMovie.textContent = dataMovies[y].author;
+    hoverVideoContainer.appendChild(authorMovie);
+
+    var playButtonContainer = document.createElement("div");
+    playButtonContainer.classList.add("playButtonContainerRecent");
+    recentMovie.appendChild(playButtonContainer);
+
+    var playButtonImg = document.createElement("img");
+    playButtonImg.classList.add("playButtonImg");
+    playButtonImg.setAttribute('src', 'img/logo_plus.png');
+    playButtonContainer.appendChild(playButtonImg);
+  }
+  if (recentMovieContainer.children.length >= 3) {
+    y = 999;
+  }
 }
 
 //Séléction des élèments du DOM générés dans l'overlay
@@ -188,6 +222,15 @@ function overlayPop(currenta) {
   }
 
   overlayVideo.style.display = "block";
+}
+
+//évènement clic sur le bouton "plus" des FILMS RECENTS du hover pour apparition de l'Overlay
+for (let c = 0; c < plusButtonContainerSelection.length; c++) {
+  playButtonContainerRecent[c].addEventListener("click", function() {
+    currenta = parseInt(plusButtonContainerSelection[b].parentElement.getAttribute("name"));
+
+    overlayPop(currenta);
+  })
 }
 
 //évènement clic sur le bouton "plus" des FILMS RECENTS du hover pour apparition de l'Overlay

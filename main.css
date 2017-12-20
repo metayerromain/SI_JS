@@ -15,6 +15,11 @@
   font-weight: bold;
 }
 
+::selection {
+  background: #277e7f;
+  color: #fff;
+}
+
 html {
   font-size: 62.5%;
   /* base de 10 */
@@ -34,13 +39,14 @@ body {
   width: 2rem;
   height: 2rem;
   margin-right: 3rem;
-  z-index: 4;
+  z-index: 11;
 }
 
 .burgerPosition {
   position: fixed;
   top: 3rem;
-  left: 90%;
+  left: 87%;
+  /* animation: cross-ease 0.5s reverse both; */
 }
 
 .burger-menu {
@@ -51,31 +57,45 @@ body {
   width: 2rem;
   height: 0.3rem;
   background: #fff;
-  z-index: 5;
+  z-index: 12;
 }
 
-.burger-menu::before {
-  content: "";
+.burgerMenuBefore {
   position: absolute;
-  top: -150%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 2rem;
   height: 0.3rem;
   background: #fff;
-  z-index: 5;
+  z-index: 12;
 }
 
-.burger-menu::after {
-  content: "";
+.burgerMenuAfter {
   position: absolute;
-  top: 220%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 2rem;
   height: 0.3rem;
   background: #fff;
-  z-index: 5;
+  z-index: 12;
+}
+
+.burgerMidDisplay {
+  display: none;
+}
+
+.burgerRotateTop {
+  top: 50%;
+  transform: translate(-50%, -50%) rotateZ(50deg);
+  animation: cross 1s both;
+}
+
+.burgerRotateBot {
+  top: 50%;
+  transform: translate(-50%, -50%) rotateZ(-50deg);
+  animation: cross 1s both;
 }
 
 .header {
@@ -121,7 +141,7 @@ body {
   width: 15%;
   background: #111111;
   color: #f2f2f2;
-  z-index: 9999;
+  z-index: 10;
 }
 
 .closeBurger {
@@ -129,15 +149,38 @@ body {
   animation: slide-in-right 0.5s both;
 }
 
-.menuTitle, .menuGenre, .menuRecent {
+.seConnecterPosition {
+  margin-top: 3.6rem;
+  margin-left: 7.5rem;
+}
+
+.seConnecter {
+  padding: 0.6rem 1rem;
+  border-radius: 25px;
+  background: rgb(195, 195, 195);
+  color: #111;
+  text-decoration: none;
+}
+
+.menuTitle {
   font-size: 1.4rem;
-  margin-top: 3rem;
-  margin-left: 3rem;
+  margin-top: 5rem;
+  margin-left: 2rem;
+}
+
+.menuGenre, .menuRecent {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+
+.menuList {
+  margin-top: 1rem;
 }
 
 .menuListItems {
-  margin-left: 5rem;
-  margin-top: 3rem
+  margin-left: 3rem;
+  margin-top: 0.5rem;
 }
 
 hr {
@@ -161,6 +204,24 @@ hr {
 }
 
 .recent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4rem;
+  margin: 0 4rem;
+}
+
+.notreSelectionContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.recentTitle {
+  color: #f2f2f2;
+  font-size: 2rem;
+  margin-bottom: 4rem;
+}
+
+.notreSelection {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 4rem;
@@ -301,6 +362,15 @@ input[type="checkbox"], input[type="radio"] {
   transform: translate(-50%, -50%);
 }
 
+.plusButtonContainerSelection {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .playButtonImg {
   width: 100%;
 }
@@ -426,7 +496,7 @@ input[type="checkbox"], input[type="radio"] {
   top: 0;
   position: fixed;
   margin: 0 auto;
-  z-index: 8;
+  z-index: 100;
   background: rgba(0, 0, 0, 0.8);
 }
 
@@ -601,6 +671,7 @@ input[type="checkbox"], input[type="radio"] {
   font-size: 1.4rem;
   border-top: 5px solid #277e7f;
   padding-top: 1rem;
+  line-height: 1.5;
 }
 
 .overlayGenre {
@@ -608,33 +679,11 @@ input[type="checkbox"], input[type="radio"] {
   margin-left: 5rem;
 }
 
-@keyframes slide-in-right {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-in-body {
-  0% {
-    width: 100%;
-    opacity: 1;
-  }
-  100% {
-    width: 85%;
-    opacity: 1;
-  }
-}
-
 /*PLAYER VIDEO*/
 
 .player-container {
   display: none;
-  z-index: 10;
+  z-index: 15;
   --width: 800px;
   width: var(--width);
   height: calc(var(--width) / 16 * 9);
@@ -811,4 +860,48 @@ video::-webkit-media-controls {
 
 .tag-highlight {
   background-color: #528D93;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-body {
+  0% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 85%;
+    opacity: 1;
+  }
+}
+
+@keyframes cross {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 2rem;
+    opacity: 1;
+  }
+}
+
+@keyframes cross-ease {
+  0% {
+    right: 0;
+    opacity: 0;
+  }
+  100% {
+    right: 5%;
+    opacity: 1;
+  }
 }
